@@ -1,5 +1,6 @@
 # Build An Alexa Local Recommendations Skill
-[![Voice User Interface](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/1-on._TTH_.png)](../step-by-step/1-voice-user-interface.md)[![Lambda Function](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/2-off._TTH_.png)](../step-by-step/2-lambda-function.md)[![Connect VUI to Code](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/3-off._TTH_.png)](../step-by-step/3-connect-vui-to-code.md)[![Testing](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/4-off._TTH_.png)](../step-by-step/4-testing.md)[![Customization](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/5-off._TTH_.png)](../step-by-step/5-customization.md)[![Publication](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/6-off._TTH_.png)](../step-by-step/6-publication.md)
+[![Voice User Interface](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/1-off._TTH_.png)](/step-by-step/1-voice-user-interface.md)[![Lambda Function](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/2-off._TTH_.png)](/step-by-step/2-lambda-function.md)[![Connect VUI to Code](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/3-off._TTH_.png)](/step-by-step/3-connect-vui-to-code.md)[![Testing](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/4-off._TTH_.png)](/step-by-step/4-testing.md)[![Customization](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/5-off._TTH_.png)](/step-by-step/5-customization.md)[![Intents and Slots](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/5-off._TTH_.png)](/step-by-step/6-intents-slots.md)[![Smart Recommendations](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/5-off._TTH_.png)](/step-by-step/7-smart-recommendations.md)[![Alexa Design](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/5-off._TTH_.png)](/step-by-step/8-alexa-design.md)[![IoT](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/5-off._TTH_.png)](/step-by-step/9-alexa-iot.md)[![Publication](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/6-off._TTH_.png)](/step-by-step/10-publication.md)
+
 
 ## Setting up Your Voice User Interface
 
@@ -103,81 +104,10 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
         ```
        ([get this on GitHub](../speech-assets/intent-schema.json))
 
-        Note the AttractionIntent, which has a slot defined: distance.  Amazon provides Built-In Slots to handle commonly recurring sets. We've used these [Built-In Slots]((https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference#list-types)) to set the type for this slot: AMAZON.NUMBER.  Later in this course you may want to define a custom slot type. We'll give you an example here, though you won't need it right now.
+        Note the AttractionIntent, which has a slot defined: distance.  Amazon provides Built-In Slots to handle commonly recurring sets. We've used these [Built-In Slots]((https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference#list-types)) to set the type for this slot: AMAZON.NUMBER.  Later in this course we will define a custom slot type. Let's continue ahead with what we have for now.
 
-    2.  **Custom Slot Types** Custom slots are sets of training data for Alexa to give her an idea of the types of data you expect to receive from your skill users. Note that the values in a custom slot *do not* function like a drop-down list on a website.  If your custom slot contains a list of colors in the rainbow, and your user responds with a color that isn't in your list, you will still receive "sky blue" as an answer, and your skill must be able to handle those situations.
 
-        For this example, you will need to create one custom slot type: [US_STATE_ABBR](../speech-assets/US_STATE_ABBR-slotvalues.txt).  To create a custom slot type, click **Add Slot Type** to open the "Adding slot type" fields.
-
-        ![Add Slot Type](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/1-7-2-add-slot-type._TTH_.png)
-
-        ![Adding Slot Type](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/1-7-2-adding-slot-type._TTH_.png)
-
-        To create your custom slot, follow these steps:
-
-        1.  Use the same name for **Enter Type** that is already listed in the intent schema: US_STATE_ABBR.
-
-        2.  Copy the state abbreviations below and paste them in the **Enter Values** box.
-
-            ```
-            AK
-            AL
-            AZ
-            AR
-            CA
-            CO
-            CT
-            DE
-            FL
-            GA
-            HI
-            ID
-            IL
-            IN
-            IA
-            KS
-            KY
-            LA
-            ME
-            MD
-            MA
-            MI
-            MN
-            MS
-            MO
-            MT
-            NE
-            NV
-            NH
-            NJ
-            NM
-            NY
-            NC
-            ND
-            OH
-            OK
-            OR
-            PA
-            RI
-            SC
-            SD
-            TN
-            TX
-            UT
-            VT
-            VA
-            WA
-            WV
-            WI
-            WY
-            ```
-            ([get this on GitHub](../speech-assets/US_STATE_ABBR-slotvalues.txt))
-
-        3.  When you have entered the information for your new custom slot type, click **Save**.
-
-            ![Save Button](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/1-7-3-save-button._TTH_.png)
-
-    3.  **Sample Utterances** Sample utterances guide Alexa to map what a user says to the Intents that we defined earlier. Copy these sample utterances and paste them into the **Sample Utterances** box in your browser.
+    2.  **Sample Utterances** Sample utterances guide Alexa to map what a user says to the Intents that we defined earlier. Copy these sample utterances and paste them into the **Sample Utterances** box in your browser.
 
         ```
         AboutIntent about
