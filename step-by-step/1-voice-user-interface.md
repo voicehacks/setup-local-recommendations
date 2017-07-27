@@ -55,54 +55,53 @@ There are two parts to an Alexa skill.  The first part is the [Voice User Interf
 
     ### Interaction Model Instructions
     1.  **Intent Schema** An intent schema defines the actions that we want our users to be able to take.  We will dive into modifying this schema later in this guide, so for now, just copy and paste this code into the Intent Schema box.
-
         ```javascript
-        {
-  "intents": [
-    {
-      "intent": "AboutIntent",  "slots":[]
-    },
+                {
+          "intents": [
+            {
+              "intent": "AboutIntent",  "slots":[]
+            },
 
-    {
-      "intent": "CoffeeIntent",  "slots":[]
-    },
-    {
-      "intent": "BreakfastIntent",  "slots":[]
-    },
-    {
-      "intent": "LunchIntent",  "slots":[]
-    },
-    {
-      "intent": "DinnerIntent",  "slots":[]
-    },
-    {
-      "intent": "AttractionIntent",
-      "slots":[
-        { "name":"distance", "type":"AMAZON.NUMBER" }
-      ]
-    },
-    {
-      "intent": "GoOutIntent",  "slots":[]
-    },
-    {
-      "intent": "AMAZON.YesIntent"
-    },
-    {
-      "intent": "AMAZON.NoIntent"
-    },
-    {
-      "intent": "AMAZON.HelpIntent"
-    },
-    {
-      "intent": "AMAZON.StopIntent"
-    },
-    {
-      "intent": "AMAZON.CancelIntent"
-    }
-  ]
-}
+            {
+              "intent": "CoffeeIntent",  "slots":[]
+            },
+            {
+              "intent": "BreakfastIntent",  "slots":[]
+            },
+            {
+              "intent": "LunchIntent",  "slots":[]
+            },
+            {
+              "intent": "DinnerIntent",  "slots":[]
+            },
+            {
+              "intent": "AttractionIntent",
+              "slots":[
+                { "name":"distance", "type":"AMAZON.NUMBER" }
+              ]
+            },
+            {
+              "intent": "GoOutIntent",  "slots":[]
+            },
+            {
+              "intent": "AMAZON.YesIntent"
+            },
+            {
+              "intent": "AMAZON.NoIntent"
+            },
+            {
+              "intent": "AMAZON.HelpIntent"
+            },
+            {
+              "intent": "AMAZON.StopIntent"
+            },
+            {
+              "intent": "AMAZON.CancelIntent"
+            }
+          ]
+        }
         ```
-        ([get this on GitHub](../speech-assets/intent-schema.json))
+       ([get this on GitHub](../speech-assets/intent-schema.json))
 
         Note the AttractionIntent, which has a slot defined: distance.  Amazon provides Built-In Slots to handle commonly recurring sets. We've used these [Built-In Slots]((https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference#list-types)) to set the type for this slot: AMAZON.NUMBER.  Later in this course you may want to define a custom slot type. We'll give you an example here, though you won't need it right now.
 
