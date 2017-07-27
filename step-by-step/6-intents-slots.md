@@ -87,9 +87,9 @@ Continuing with Local Recommendations, we’ve customized for our city/town, let
 
 1. Now when you test your utterance in the skill builder, you should get and be able to hear a response.
 
-    <a href="../7-smart-recommendations.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/3-7-next-button._TTH_.png" /></a>
+    <a href="../step-by-step/7-smart-recommendations.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/3-7-next-button._TTH_.png" /></a>
 
 <br/><br/>
-<a href="../step-by-step/7-smart-recommendations.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_next_publication._TTH_.png" /></a>
+<!-- <a href="../step-by-step/7-smart-recommendations.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_next_publication._TTH_.png" /></a> -->
 
 <img height="1" width="1" src="https://www.facebook.com/tr?id=1847448698846169&ev=PageView&noscript=1"/>
