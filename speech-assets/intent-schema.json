@@ -1,13 +1,44 @@
-{"intents": [
-    {"intent": "AnswerIntent", "slots":[{"name": "StateName", "type": "AMAZON.US_STATE"},
-                                        {"name": "Capital", "type": "AMAZON.US_CITY"}, 
-                                        {"name": "StatehoodYear", "type": "AMAZON.FOUR_DIGIT_NUMBER"},
-                                        {"name": "Abbreviation", "type": "US_STATE_ABBR"},
-                                        {"name": "StatehoodOrder", "type": "AMAZON.NUMBER"}]},
-    {"intent": "QuizIntent"},
-    {"intent": "AMAZON.StopIntent"},
-    {"intent": "AMAZON.CancelIntent"},
-    {"intent": "AMAZON.StartOverIntent"},
-    {"intent": "AMAZON.HelpIntent"}
+{
+  "intents": [
+    {
+      "intent": "AboutIntent",  "slots":[]
+    },
+
+    {
+      "intent": "CoffeeIntent",  "slots":[]
+    },
+    {
+      "intent": "BreakfastIntent",  "slots":[]
+    },
+    {
+      "intent": "LunchIntent",  "slots":[]
+    },
+    {
+      "intent": "DinnerIntent",  "slots":[]
+    },
+    {
+      "intent": "AttractionIntent",
+      "slots":[
+        { "name":"distance", "type":"AMAZON.NUMBER" }
+      ]
+    },
+    {
+      "intent": "GoOutIntent",  "slots":[]
+    },
+    {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
   ]
 }
