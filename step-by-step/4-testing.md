@@ -112,14 +112,6 @@ pronounce it. To make changes to her pronunciation, use Speech Synthesis Markup 
     *  [Echosim.io](https://echosim.io) - a browser-based Alexa skill testing tool that makes it easy to test your skills without carrying a physical device everywhere you go.
     *  [Unit Testing with Alexa](../unit-testing.md) - a modern approach to unit testing your Alexa skills with [Postman](http://getpostman.com) and [Amazon API Gateway](http://aws.amazon.com/apigateway).
 
-7.  **Verify that cards are working properly.**  Open the Alexa app on your phone, or at http://alexa.amazon.com.
-
-    *  Ask the skill for a state: "Alexa, ask Quiz Game about Ohio."
-    *  Verify that a card was created in the Alexa app that resembles this screenshot:
-
-       <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/4-7-alexa-app._TTH_.png"/>   
-
-
 8.  **If your sample skill is working properly, you can now customize your skill.**
 
 <br/><br/>
