@@ -11,18 +11,18 @@ We are almost done!  The last step is to add the metadata that your skill will u
 
     <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/6-1-publishing-information._TTH_.png" />
 
-2.  **Complete the Global Fields data.**  These fields apply across all of the languges that your skill supports.
+2.  **Complete the Global Fields data.**  These fields apply across all of the languages that your skill supports.
 
     <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/6-2-global-fields._TTH_.png" />
 
-    *  **For Category, we are building a quiz game, so select "Games, Trivia, and Accessories."**  You will also be presented with a **Sub-Category** option.  For this skill, choose "Knowledge and Trivia."
+    *  **For Category, we are building a reference guide, so select "Education & Reference".**  You will need to select a **Sub-Category** option.
 
     *  **Provide testing instructions.** Testing instructions give you an opportunity to explain your skill, and any special or possibly confusing features, to the certification team.  A value is required in this box.
 
-        *  Since you are using our Quiz Game Sample, make sure to add this sentence to your Testing Instructions:
+        *  Since you are using our Local Recommendations Sample, make sure to add this sentence to your Testing Instructions:
 
            ```
-           This was built using the Quiz Game Sample.
+           This was built using the Local Recommendations Sample.
            ```
 
            This will let the testing team understand what you're providing them, and should decrease the testing time required.        
@@ -85,12 +85,12 @@ We are almost done!  The last step is to add the metadata that your skill will u
 
     <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/6-8-global-fields._TTH_.png"/>
 
-    *  **Does this skill allow users to make purchases or spend real money?** For this quiz game, the answer is no.  For future skills, make sure you answer this appropriately.
+    *  **Does this skill allow users to make purchases or spend real money?** For this local recommendations skill, the answer is no.  For future skills, make sure you answer this appropriately.
 
-    *  **Does this Alexa skill collect users' personal information?** Again, for this quiz game, the answer is no.  If you do collect information about a user, such as names, email addresses, phone numbers, and so forth, ensure that you answer Yes to this question.
+    *  **Does this Alexa skill collect users' personal information?** Again, for this skill, the answer is no.  If you do collect information about a user, such as names, email addresses, phone numbers, and so forth, ensure that you answer Yes to this question.
         *  Answering "yes" to this question will also require you to provide a link to your Privacy Policy at the bottom of the page.
 
-    *  **Is your skill directed to children under the age of 13?** Because you customized this skill with data you provided, it is possible that you created a skill that targets children under the age of 13.  For the United States Quiz, the answer is **no** because it doesn't target a specific age group.
+    *  **Is your skill directed to children under the age of 13?** Because you customized this skill with data you provided, it is possible that you created a skill that targets children under the age of 13.  For the Gloucester Guide, the answer is **no** because it doesn't target a specific age group.
         * Factors to consider in determining if this skill is directed to children under 13 include:
             * Subject matter of the skill
             * Presence of child-oriented activities and incentives
@@ -103,7 +103,7 @@ We are almost done!  The last step is to add the metadata that your skill will u
 
 9.  **Export Compliance.** Be certain that you agree with all of the conditions.  If you do, make sure to check this box, as Amazon requires this permission to distribute your skill around the globe.  
 
-10. **Privacy Policy URL.** This is an optional field, and should not be required for this Quiz Game skill sample.  You can leave it blank.
+10. **Privacy Policy URL.** This is an optional field, and should not be required for this Local Recommendations skill sample.  You can leave it blank.
 
 11. **Terms of Use URL.** This is also optional, and you can leave it blank.
 

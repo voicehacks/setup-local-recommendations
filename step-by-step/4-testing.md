@@ -32,7 +32,7 @@ pronounce it. To make changes to her pronunciation, use Speech Synthesis Markup 
 
     Return to the Voice Simulator as needed to ensure that Alexa says words and phrases as you would expect.
 
-4.  **Test your skill with the Service Simulator.** To validate that your skill is working as expected, use the Service Simulator.  In the **Enter Utterance** text box, type "tell me about North Dakota."
+4.  **Test your skill with the Service Simulator.** To validate that your skill is working as expected, use the Service Simulator.  In the **Enter Utterance** text box, type "recommend an attraction."
 
     <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/4-4-service-simulator._TTH_.png" />
 
@@ -40,11 +40,11 @@ pronounce it. To make changes to her pronunciation, use Speech Synthesis Markup 
     * After you click the "Ask [Your Skill Name]" button, you should see the **Lambda Request** and **Lambda Response** boxes get populated with JSON data like in the screenshot above.
     * Click the **Listen** button in the bottom right corner to hear Alexa read the response.
     * You can have an entire conversation with your skill with the Service Simulator.  Try the following commands:
-        * "Start a quiz"
-        * [Press the listen button, and type an answer to the first question in the box]
-        * [Press the listen button, and type an answer the second question in the box]
+        * "tell me about this place"
+        * [Press the listen button, and type "recommend an attraction" in the box]
+        * [Press the listen button, and type "give me an activity" in the box]
 
-        (Continue this process for the entire quiz. To start over, click the "Reset" button.)
+        (Continue this process for all of the utterances. To start over, click the "Reset" button.)
 
     * If you receive a response that reads: *"The remote endpoint could not be called, or the response it returned was invalid,"* this is an indication that something is broken.  AWS Lambda offers an additional testing tool to help you troubleshoot your skill.
 
@@ -53,45 +53,25 @@ pronounce it. To make changes to her pronunciation, use Speech Synthesis Markup 
 
         ```JAVASCRIPT
         {
-            "session": {
-                "sessionId": "SessionId.457b2d2e-5014-491a-b727-40c9484e35c0",
-                "application": {
-                "applicationId": "amzn1.ask.skill.3065652a-aeba-475c-870a-a2288d761637"
-                },
-                "attributes": {},
-                "user": {
-                "userId": "amzn1.ask.account.AENLL2Z6RE7QK6242NGYH7C4ATZ5BGNLUWOQOFMEDSFL7N3Y4VFWTPFFG4SJ73WLURBECZTF6ITOAQKP5MEKL2DCS736VXURRP22AEPF67BQRKJ3BSNNWTLEZPXXG6PYG56LQTMOD6UB24OFF5RRTLK2EYGKRL3VEEV24UBZVVTQNJ6SSWYKMQGUQUNRPX72HY24K2OZLWR5Y3Q"
-                },
-                "new": true
+        "session": {
+            "sessionId": "SessionId.f9e6dcbb-b7da-4b47-905c-1e2e1ab673d5",
+            "application": {
+                "applicationId": "amzn1.echo-sdk-ams.app.[unique-value-here]"
             },
-            "request": {
-                "type": "IntentRequest",
-                "requestId": "EdwRequestId.dfd1d8f6-1bab-49cd-b4c9-fbba2f522d11",
-                "locale": "en-US",
-                "timestamp": "2017-02-27T19:28:31Z",
-                "intent": {
-                "name": "AnswerIntent",
-                "slots": {
-                    "Abbreviation": {
-                    "name": "Abbreviation"
-                    },
-                    "StatehoodYear": {
-                    "name": "StatehoodYear"
-                    },
-                    "StateName": {
-                    "name": "StateName",
-                    "value": "Ohio"
-                    },
-                    "Capital": {
-                    "name": "Capital"
-                    },
-                    "StatehoodOrder": {
-                    "name": "StatehoodOrder"
-                    }
-                }
-                }
+            "attributes": {},
+            "user": {
+                "userId": "amzn1.ask.account.ZZZZZZGWYOK7OHKVW3MQA2S23ZFJYDLQUB4Y7FMKU2TXQN5GS2ICRONPW3ZASKRWZHW6DLQD4YWCOITWIVUVO37UO4JU65GOAPA2EU4S77MG6AKARMB2Z5I5ZLEWNO6WMOB22VFKU3IE6QZSNGC2H3HMMG2C2V72J4VXVMFQZYSPSKC42EQFYVPYN4DDH6TPVTGF563MOPBY"
             },
-            "version": "1.0"
+            "new": true
+        },
+        "request": {
+            "type": "LaunchRequest",
+
+            "requestId": "request5678",
+
+            "locale": "en-US"
+        },
+        "version": "1.0"
         }
         ```
 
@@ -130,7 +110,7 @@ pronounce it. To make changes to her pronunciation, use Speech Synthesis Markup 
 6.  **Other testing methods to consider:**
 
     *  [Echosim.io](https://echosim.io) - a browser-based Alexa skill testing tool that makes it easy to test your skills without carrying a physical device everywhere you go.
-    *  [Unit Testing with Alexa](https://github.com/alexa/skill-sample-nodejs-quiz-game/blob/master/unit-testing.md) - a modern approach to unit testing your Alexa skills with [Postman](http://getpostman.com) and [Amazon API Gateway](http://aws.amazon.com/apigateway).
+    *  [Unit Testing with Alexa](../unit-testing.md) - a modern approach to unit testing your Alexa skills with [Postman](http://getpostman.com) and [Amazon API Gateway](http://aws.amazon.com/apigateway).
 
 7.  **Verify that cards are working properly.**  Open the Alexa app on your phone, or at http://alexa.amazon.com.
 
