@@ -20,7 +20,7 @@
 *  Simple graphical editing tool
 
 ## What Your Skill Will Do
-Welcome to Voicehacks! At some point we all gain some unexpected free time and wonder "What should I do today?". Whether going to a local restaurant or coffeehouse, checking out the local library, or just staying in if the weather is bad, some suggestions are almost always welcome. Especially if those suggestions come from an individual who knows the area well.
+Welcome to Voicehacks! At some point we all gain some unexpected free time and wonder "What should I do today?". Whether going to a local restaurant or coffeehouse, checking out the local library, or just staying inside if the weather is bad, some suggestions are almost always welcome. Especially when those suggestions come from an individual who knows the area very well.
 
 You can now bring that experience to Alexa using our new local recommendations template. Today you will provide the city and the places to visit in that city, and Alexa will dynamically build a recommendation for you. In the guide, Alexa will give recommendations like:
 *  "For breakfast, try this, Zeke's place."
