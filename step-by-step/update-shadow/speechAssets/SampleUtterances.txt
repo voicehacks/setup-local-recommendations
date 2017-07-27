@@ -1,0 +1,4 @@
+
+MyIntent hello
+CityIntent go to {city}
+CityIntent i am from {city}
