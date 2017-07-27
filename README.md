@@ -16,31 +16,21 @@
 ## What You Will Need
 *  [Amazon Developer Portal Account](http://developer.amazon.com)
 *  [Amazon Web Services Account](http://aws.amazon.com/)
-*  The sample code on [GitHub](https://github.com/alexa/skill-sample-nodejs-quiz-game).
+*  The sample code on [GitHub](#).
 *  Simple graphical editing tool
-*  At least 25 rows of interesting data to quiz your users with.
-   *  Examples: [U.S. States](https://github.com/alexa/skill-sample-nodejs-quiz-game/blob/master/data/states.js), [Video Games](https://github.com/alexa/skill-sample-nodejs-quiz-game/blob/master/data/videogames.js), [Books](https://github.com/alexa/skill-sample-nodejs-quiz-game/blob/master/data/books.js), [British Monarchs](https://github.com/alexa/skill-sample-nodejs-quiz-game/blob/master/data/monarchs.js)
 
 ## What Your Skill Will Do
-We all hold interesting data in our heads. Maybe it's a list of all the action figures we played with as a kid, specific details about the 50 states, or a historical list of the starting quarterbacks for our favorite football team. When we're with friends, sometimes we'll even quiz each other on these nuanced categories of information. It's a fun, interactive way to share our knowledge and learn more about our favorite topics.
+Welcome to Voicehacks! At some point we all gain some unexpected free time and wonder "What should I do today?". Whether going to a local restaurant or coffeehouse, checking out the local library, or just staying in if the weather is bad, some suggestions are almost always welcome. Especially if those suggestions come from an individual who knows the area well.
 
-You can now bring that experience to Alexa using our new quiz skill template. You provide the data and the number of properties in that data, and Alexa will dynamically build a quiz game for you. In the quiz, Alexa will ask questions like:
-*  "What is the capital of Vermont?"
-*  "How many career home runs did Mickey Mantle hit?"
-*  "What year was Harry Potter and the Sorcerer's Stone first published?"
-
-You get to provide the data, as well as the number of properties in that data, and Alexa will dynamically build a quiz game for you.  In the quiz, Alexa will ask questions like:
-*  "Alexa, ask United States Quiz about Ohio."
-*  "Alexa, ask Hockey Quiz about Wayne Gretzky."
-*  "Alexa, ask Video Game Quiz about River City Ransom."
+You can now bring that experience to Alexa using our new local recommendations template. Today you will provide the city and the places to visit in that city, and Alexa will dynamically build a recommendation for you. In the guide, Alexa will give recommendations like:
+*  "For breakfast, try this, Zeke's place."
+*  "Seaport Grille is located at 6 Rowe Square."
+*  "Try whale watching, which is 8 miles away. Have fun!"
 
 If you’re in the US, we've also included the new [speechcons](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speechcon-reference) feature for Alexa skill development. Speechcons are special words and phrases that Alexa pronounces more expressively. We use them in this quiz game to let the user know whether they gave a correct or incorrect answer during the quiz.
 
-If you would like to see an example of this skill in action, you can enable the [United States Quiz](https://www.amazon.com/Jeff-Blankenburg-United-States-Quiz/dp/B06X9GQBRL) from the [Alexa app](http://amazon.com/skills).  You may not get all of the answers right on your first try, but you'll definitely get a great feel for what your new quiz game could sound like!
+If you would like to see an example of this skill in action, you can enable the [Gloucester Guide](https://www.amazon.com/Robert-McCauley-Gloucester-Guide/dp/B0736QNPP1/ref=sr_1_5?s=digital-skills&ie=UTF8&qid=1501180976&sr=1-5&keywords=local+guide) from the [Alexa app](http://amazon.com/skills).  You may not get all of the info right away, but you'll definitely get a great feel for what your new local guide could sound like!
 
 <a href="https://github.com/alexa/skill-sample-nodejs-quiz-game/blob/master/step-by-step/1-voice-user-interface.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_get_started._TTH_.png" /></a>
 
 <img height="1" width="1" src="https://www.facebook.com/tr?id=1847448698846169&ev=PageView&noscript=1"/>
-
-
-
