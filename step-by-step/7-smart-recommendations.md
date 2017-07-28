@@ -1,5 +1,6 @@
 # Build An Alexa Local Recommendations Skill
-[![Voice User Interface](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/1-off._TTH_.png)](/step-by-step/1-voice-user-interface.md)[![Lambda Function](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/2-off._TTH_.png)](/step-by-step/2-lambda-function.md)[![Connect VUI to Code](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/3-off._TTH_.png)](/step-by-step/3-connect-vui-to-code.md)[![Testing](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/4-off._TTH_.png)](/step-by-step/4-testing.md)[![Customization](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/5-off._TTH_.png)](/step-by-step/5-customization.md) || [Intents and Slots](/step-by-step/6-intents-slots.md) || [Smart Recommendations](/step-by-step/7-smart-recommendations.md) || [Alexa Design](/step-by-step/8-alexa-design.md) || [IoT](https://github.com/voicehacks/alexa-iot/blob/master/README.md) || [![Publication](https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/6-off._TTH_.png)](/step-by-step/10-publication.md)
+[Voice User Interface](/step-by-step/1-voice-user-interface.md) || [Lambda Function](/step-by-step/2-lambda-function.md) || [Connect VUI to Code](/step-by-step/3-connect-vui-to-code.md) || [Testing](/step-by-step/4-testing.md) || [Customization](/step-by-step/5-customization.md) || [Intents and Slots](/step-by-step/6-intents-slots.md) || [Smart Recommendations](/step-by-step/7-smart-recommendations.md) || [Alexa Design](/step-by-step/8-alexa-design.md) || [IoT](https://github.com/voicehacks/alexa-iot/blob/master/README.md) || [Publication](/step-by-step/10-publication.md)
+
 
 
 <!--<a href="../step-by-step/1-voice-user-interface.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/1-locked._TTH_.png" /></a><a href="../step-by-step/2-lambda-function.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/2-locked._TTH_.png" /></a><a href="../step-by-step/3-connect-vui-to-code.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/3-locked._TTH_.png" /></a><a href="../step-by-step/4-testing.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/4-locked._TTH_.png" /></a><a href="../step-by-step/5-customization.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/5-locked._TTH_.png" /></a><a href="../step-by-step/10-publication.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/navigation/6-on._TTH_.png" /></a>-->
@@ -73,6 +74,10 @@ For example, add logic to decide, based on current time and weather conditions, 
 1. Type 'go outside' into the Enter Utterance field found in the Service Simulator and press enter
 
 1. Alexa should give us a customized recommendation according to your code.
+
+### Extra Credit
+
+What if we wanted to get info about local movie showtimes? Try adding another API call, maybe one that checks movie showtimes for a local theater, or something creative that you come up with yourself!
 
 
     <a href="../step-by-step/8-alexa-design.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/3-7-next-button._TTH_.png" /></a>
