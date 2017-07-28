@@ -131,4 +131,4 @@ We are almost done!  The last step is to add the metadata that your skill will u
 <img height="1" width="1" src="https://www.facebook.com/tr?id=1847448698846169&ev=PageView&noscript=1"/>
 
 
-For another challenge that we'll be working on this week, check out the <a href="https://github.com/voicehacks/setup-local-recommendations"> Recipe Skill</a>.
+For another challenge that we'll be working on this week, check out the <a href="https://github.com/voicehacks/Recipe"> Recipe Skill</a>.
