@@ -87,6 +87,11 @@ Continuing with Local Recommendations, we’ve customized for our city/town, let
 
 1. Now when you test your utterance in the skill builder, you should get and be able to hear a response.
 
+### Extra Credit
+
+What about custom slot types? The Alexa [Quiz Game](https://github.com/alexa/skill-sample-nodejs-quiz-game/blob/master/step-by-step/1-voice-user-interface.md) Skill uses a custom slot, named US_STATE_ABBR.  Try creating a custom slot for your own skill.
+
+
     <a href="../step-by-step/7-smart-recommendations.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/3-7-next-button._TTH_.png" /></a>
 
 <br/><br/>

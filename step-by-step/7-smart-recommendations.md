@@ -75,6 +75,10 @@ For example, add logic to decide, based on current time and weather conditions, 
 
 1. Alexa should give us a customized recommendation according to your code.
 
+### Extra Credit
+
+What if we wanted to get info about local movie showtimes? Try adding another API call, maybe one that checks movie showtimes for a local theater, or something creative that you come up with yourself!
+
 
     <a href="../step-by-step/8-alexa-design.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/3-7-next-button._TTH_.png" /></a>
 
