@@ -1,403 +1,287 @@
-'use strict';
-const Alexa = require('alexa-sdk');
 
-//=========================================================================================================================================
-//TODO: The items below this comment need your attention
-//=========================================================================================================================================
+// 1. Text strings =====================================================================================================
+//    Modify these strings and messages to change the behavior of your Lambda function
 
-//Replace with your app ID (OPTIONAL).  You can find this value at the top of your skill's page on http://developer.amazon.com.
-//Make sure to enclose your value in quotes, like this:  var APP_ID = "amzn1.ask.skill.bb4045e6-b3e8-4133-b650-72923c5980f1";
-var APP_ID = undefined;
-
-//This function returns a descriptive sentence about your data.  Before a user starts a quiz, they can ask about a specific data element,
-//like "Ohio."  The skill will speak the sentence from this function, pulling the data values from the appropriate record in your data.
-function getSpeechDescription(item)
-{
-    var sentence = item.StateName + " is the " + item.StatehoodOrder + "th state, admitted to the Union in " + item.StatehoodYear + ".  The capital of " + item.StateName + " is " + item.Capital + ", and the abbreviation for " + item.StateName + " is <break strength='strong'/><say-as interpret-as='spell-out'>" + item.Abbreviation + "</say-as>.  I've added " + item.StateName + " to your Alexa app.  Which other state or capital would you like to know about?";
-    return sentence;
-}
-
-//We have provided two ways to create your quiz questions.  The default way is to phrase all of your questions like: "What is X of Y?"
-//If this approach doesn't work for your data, take a look at the commented code in this function.  You can write a different question
-//structure for each property of your data.
-function getQuestion(counter, property, item)
-{
-    return "Here is your " + counter + "th question.  What is the " + formatCasing(property) + " of "  + item.StateName + "?";
-
-    /*
-    switch(property)
-    {
-        case "City":
-            return "Here is your " + counter + "th question.  In what city do the " + item.League + "'s "  + item.Mascot + " play?";
-        break;
-        case "Sport":
-            return "Here is your " + counter + "th question.  What sport do the " + item.City + " " + item.Mascot + " play?";
-        break;
-        case "HeadCoach":
-            return "Here is your " + counter + "th question.  Who is the head coach of the " + item.City + " " + item.Mascot + "?";
-        break;
-        default:
-            return "Here is your " + counter + "th question.  What is the " + formatCasing(property) + " of the "  + item.Mascot + "?";
-        break;
+var languageStrings = {
+    'en': {
+        'translation': {
+            'WELCOME' : "Welcome to Gloucester Guide!",
+            'HELP'    : "Say about, to hear more about the city, or say coffee, breakfast, lunch, or dinner, to hear local restaurant suggestions, or say recommend an attraction, or say, go outside. ",
+            'ABOUT'   : "Gloucester Massachusetts is a city on the Atlantic Ocean.  A popular summer beach destination, Gloucester has a rich history of fishing and ship building.",
+            'STOP'    : "Okay, see you next time!"
+        }
     }
-    */
-}
-
-//This is the function that returns an answer to your user during the quiz.  Much like the "getQuestion" function above, you can use a
-//switch() statement to create different responses for each property in your data.  For example, when this quiz has an answer that includes
-//a state abbreviation, we add some SSML to make sure that Alexa spells that abbreviation out (instead of trying to pronounce it.)
-function getAnswer(property, item)
-{
-    switch(property)
-    {
-        case "Abbreviation":
-            return "The " + formatCasing(property) + " of " + item.StateName + " is <say-as interpret-as='spell-out'>" + item[property] + "</say-as>. "
-        break;
-        default:
-            return "The " + formatCasing(property) + " of " + item.StateName + " is " + item[property] + ". "
-        break;
-    }
-}
-
-//This is a list of positive speechcons that this skill will use when a user gets a correct answer.  For a full list of supported
-//speechcons, go here: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speechcon-reference
-var speechConsCorrect = ["Booya", "All righty", "Bam", "Bazinga", "Bingo", "Boom", "Bravo", "Cha Ching", "Cheers", "Dynomite",
-"Hip hip hooray", "Hurrah", "Hurray", "Huzzah", "Oh dear.  Just kidding.  Hurray", "Kaboom", "Kaching", "Oh snap", "Phew",
-"Righto", "Way to go", "Well done", "Whee", "Woo hoo", "Yay", "Wowza", "Yowsa"];
-
-//This is a list of negative speechcons that this skill will use when a user gets an incorrect answer.  For a full list of supported
-//speechcons, go here: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speechcon-reference
-var speechConsWrong = ["Argh", "Aw man", "Blarg", "Blast", "Boo", "Bummer", "Darn", "D'oh", "Dun dun dun", "Eek", "Honk", "Le sigh",
-"Mamma mia", "Oh boy", "Oh dear", "Oof", "Ouch", "Ruh roh", "Shucks", "Uh oh", "Wah wah", "Whoops a daisy", "Yikes"];
-
-//This is the welcome message for when a user starts the skill without a specific intent.
-var WELCOME_MESSAGE = "Welcome to the United States Quiz Game!  You can ask me about any of the fifty states and their capitals, or you can ask me to start a quiz.  What would you like to do?";
-
-//This is the message a user will hear when they start a quiz.
-var START_QUIZ_MESSAGE = "OK.  I will ask you 10 questions about the United States.";
-
-//This is the message a user will hear when they try to cancel or stop the skill, or when they finish a quiz.
-var EXIT_SKILL_MESSAGE = "Thank you for playing the United States Quiz Game!  Let's play again soon!";
-
-//This is the message a user will hear after they ask (and hear) about a specific data element.
-var REPROMPT_SPEECH = "Which other state or capital would you like to know about?";
-
-//This is the message a user will hear when they ask Alexa for help in your skill.
-var HELP_MESSAGE = "I know lots of things about the United States.  You can ask me about a state or a capital, and I'll tell you what I know.  You can also test your knowledge by asking me to start a quiz.  What would you like to do?";
-
-
-//This is the response a user will receive when they ask about something we weren't expecting.  For example, say "pizza" to your
-//skill when it starts.  This is the response you will receive.
-function getBadAnswer(item) { return "I'm sorry. " + item + " is not something I know very much about in this skill. " + HELP_MESSAGE; }
-
-//This is the message a user will receive after each question of a quiz.  It reminds them of their current score.
-function getCurrentScore(score, counter) { return "Your current score is " + score + " out of " + counter + ". "; }
-
-//This is the message a user will receive after they complete a quiz.  It tells them their final score.
-function getFinalScore(score, counter) { return "Your final score is " + score + " out of " + counter + ". "; }
-
-//These next four values are for the Alexa cards that are created when a user asks about one of the data elements.
-//This only happens outside of a quiz.
-
-//If you don't want to use cards in your skill, set the USE_CARDS_FLAG to false.  If you set it to true, you will need an image for each
-//item in your data.
-var USE_CARDS_FLAG = true;
-
-//This is what your card title will be.  For our example, we use the name of the state the user requested.
-function getCardTitle(item) { return item.StateName;}
-
-//This is the small version of the card image.  We use our data as the naming convention for our images so that we can dynamically
-//generate the URL to the image.  The small image should be 720x400 in dimension.
-function getSmallImage(item) { return "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/state_flag/720x400/" + item.Abbreviation + "._TTH_.png"; }
-
-//This is the large version of the card image.  It should be 1200x800 pixels in dimension.
-function getLargeImage(item) { return "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/state_flag/1200x800/" + item.Abbreviation + "._TTH_.png"; }
-
-//=========================================================================================================================================
-//TODO: Replace this data with your own.
-//=========================================================================================================================================
-var data = [
-                {StateName: "Alabama",        Abbreviation: "AL", Capital: "Montgomery",     StatehoodYear: 1819, StatehoodOrder: 22 },
-                {StateName: "Alaska",         Abbreviation: "AK", Capital: "Juneau",         StatehoodYear: 1959, StatehoodOrder: 49 },
-                {StateName: "Arizona",        Abbreviation: "AZ", Capital: "Phoenix",        StatehoodYear: 1912, StatehoodOrder: 48 },
-                {StateName: "Arkansas",       Abbreviation: "AR", Capital: "Little Rock",    StatehoodYear: 1836, StatehoodOrder: 25 },
-                {StateName: "California",     Abbreviation: "CA", Capital: "Sacramento",     StatehoodYear: 1850, StatehoodOrder: 31 },
-                {StateName: "Colorado",       Abbreviation: "CO", Capital: "Denver",         StatehoodYear: 1876, StatehoodOrder: 38 },
-                {StateName: "Connecticut",    Abbreviation: "CT", Capital: "Hartford",       StatehoodYear: 1788, StatehoodOrder: 5 },
-                {StateName: "Delaware",       Abbreviation: "DE", Capital: "Dover",          StatehoodYear: 1787, StatehoodOrder: 1 },
-                {StateName: "Florida",        Abbreviation: "FL", Capital: "Tallahassee",    StatehoodYear: 1845, StatehoodOrder: 27 },
-                {StateName: "Georgia",        Abbreviation: "GA", Capital: "Atlanta",        StatehoodYear: 1788, StatehoodOrder: 4 },
-                {StateName: "Hawaii",         Abbreviation: "HI", Capital: "Honolulu",       StatehoodYear: 1959, StatehoodOrder: 50 },
-                {StateName: "Idaho",          Abbreviation: "ID", Capital: "Boise",          StatehoodYear: 1890, StatehoodOrder: 43 },
-                {StateName: "Illinois",       Abbreviation: "IL", Capital: "Springfield",    StatehoodYear: 1818, StatehoodOrder: 21 },
-                {StateName: "Indiana",        Abbreviation: "IN", Capital: "Indianapolis",   StatehoodYear: 1816, StatehoodOrder: 19 },
-                {StateName: "Iowa",           Abbreviation: "IA", Capital: "Des Moines",     StatehoodYear: 1846, StatehoodOrder: 29 },
-                {StateName: "Kansas",         Abbreviation: "KS", Capital: "Topeka",         StatehoodYear: 1861, StatehoodOrder: 34 },
-                {StateName: "Kentucky",       Abbreviation: "KY", Capital: "Frankfort",      StatehoodYear: 1792, StatehoodOrder: 15 },
-                {StateName: "Louisiana",      Abbreviation: "LA", Capital: "Baton Rouge",    StatehoodYear: 1812, StatehoodOrder: 18 },
-                {StateName: "Maine",          Abbreviation: "ME", Capital: "Augusta",        StatehoodYear: 1820, StatehoodOrder: 23 },
-                {StateName: "Maryland",       Abbreviation: "MD", Capital: "Annapolis",      StatehoodYear: 1788, StatehoodOrder: 7 },
-                {StateName: "Massachusetts",  Abbreviation: "MA", Capital: "Boston",         StatehoodYear: 1788, StatehoodOrder: 6 },
-                {StateName: "Michigan",       Abbreviation: "MI", Capital: "Lansing",        StatehoodYear: 1837, StatehoodOrder: 26 },
-                {StateName: "Minnesota",      Abbreviation: "MN", Capital: "St. Paul",       StatehoodYear: 1858, StatehoodOrder: 32 },
-                {StateName: "Mississippi",    Abbreviation: "MS", Capital: "Jackson",        StatehoodYear: 1817, StatehoodOrder: 20 },
-                {StateName: "Missouri",       Abbreviation: "MO", Capital: "Jefferson City", StatehoodYear: 1821, StatehoodOrder: 24 },
-                {StateName: "Montana",        Abbreviation: "MT", Capital: "Helena",         StatehoodYear: 1889, StatehoodOrder: 41 },
-                {StateName: "Nebraska",       Abbreviation: "NE", Capital: "Lincoln",        StatehoodYear: 1867, StatehoodOrder: 37 },
-                {StateName: "Nevada",         Abbreviation: "NV", Capital: "Carson City",    StatehoodYear: 1864, StatehoodOrder: 36 },
-                {StateName: "New Hampshire",  Abbreviation: "NH", Capital: "Concord",        StatehoodYear: 1788, StatehoodOrder: 9 },
-                {StateName: "New Jersey",     Abbreviation: "NJ", Capital: "Trenton",        StatehoodYear: 1787, StatehoodOrder: 3 },
-                {StateName: "New Mexico",     Abbreviation: "NM", Capital: "Santa Fe",       StatehoodYear: 1912, StatehoodOrder: 47 },
-                {StateName: "New York",       Abbreviation: "NY", Capital: "Albany",         StatehoodYear: 1788, StatehoodOrder: 11 },
-                {StateName: "North Carolina", Abbreviation: "NC", Capital: "Raleigh",        StatehoodYear: 1789, StatehoodOrder: 12 },
-                {StateName: "North Dakota",   Abbreviation: "ND", Capital: "Bismarck",       StatehoodYear: 1889, StatehoodOrder: 39 },
-                {StateName: "Ohio",           Abbreviation: "OH", Capital: "Columbus",       StatehoodYear: 1803, StatehoodOrder: 17 },
-                {StateName: "Oklahoma",       Abbreviation: "OK", Capital: "Oklahoma City",  StatehoodYear: 1907, StatehoodOrder: 46 },
-                {StateName: "Oregon",         Abbreviation: "OR", Capital: "Salem",          StatehoodYear: 1859, StatehoodOrder: 33 },
-                {StateName: "Pennsylvania",   Abbreviation: "PA", Capital: "Harrisburg",     StatehoodYear: 1787, StatehoodOrder: 2 },
-                {StateName: "Rhode Island",   Abbreviation: "RI", Capital: "Providence",     StatehoodYear: 1790, StatehoodOrder: 13 },
-                {StateName: "South Carolina", Abbreviation: "SC", Capital: "Columbia",       StatehoodYear: 1788, StatehoodOrder: 8 },
-                {StateName: "South Dakota",   Abbreviation: "SD", Capital: "Pierre",         StatehoodYear: 1889, StatehoodOrder: 40 },
-                {StateName: "Tennessee",      Abbreviation: "TN", Capital: "Nashville",      StatehoodYear: 1796, StatehoodOrder: 16 },
-                {StateName: "Texas",          Abbreviation: "TX", Capital: "Austin",         StatehoodYear: 1845, StatehoodOrder: 28 },
-                {StateName: "Utah",           Abbreviation: "UT", Capital: "Salt Lake City", StatehoodYear: 1896, StatehoodOrder: 45 },
-                {StateName: "Vermont",        Abbreviation: "VT", Capital: "Montpelier",     StatehoodYear: 1791, StatehoodOrder: 14 },
-                {StateName: "Virginia",       Abbreviation: "VA", Capital: "Richmond",       StatehoodYear: 1788, StatehoodOrder: 10 },
-                {StateName: "Washington",     Abbreviation: "WA", Capital: "Olympia",        StatehoodYear: 1889, StatehoodOrder: 42 },
-                {StateName: "West Virginia",  Abbreviation: "WV", Capital: "Charleston",     StatehoodYear: 1863, StatehoodOrder: 35 },
-                {StateName: "Wisconsin",      Abbreviation: "WI", Capital: "Madison",        StatehoodYear: 1848, StatehoodOrder: 30 },
-                {StateName: "Wyoming",        Abbreviation: "WY", Capital: "Cheyenne",       StatehoodYear: 1890, StatehoodOrder: 44 }
-            ];
-
-//=========================================================================================================================================
-//Editing anything below this line might break your skill.
-//=========================================================================================================================================
-
-var counter = 0;
-
-var states = {
-    START: "_START",
-    QUIZ: "_QUIZ"
+    // , 'de-DE': { 'translation' : { 'TITLE'   : "Local Helfer etc." } }
 };
+var data = {
+    "city"        : "Gloucester",
+    "state"       : "MA",
+    "postcode"    : "01930",
+    "restaurants" : [
+        { "name":"Zeke's Place",
+            "address":"66 East Main Street", "phone": "978-283-0474",
+            "meals": "breakfast, lunch",
+            "description": "A cozy and popular spot for breakfast.  Try the blueberry french toast!"
+        },
+        { "name":"Morning Glory Coffee Shop",
+            "address":"25 Western Avenue", "phone": "978-281-1851",
+            "meals": "coffee, breakfast, lunch",
+            "description": "A homestyle diner located just across the street from the harbor sea wall."
+        },
+        { "name":"Sugar Magnolias",
+            "address":"112 Main Street", "phone": "978-281-5310",
+            "meals": "breakfast, lunch",
+            "description": "A quaint eatery, popular for weekend brunch.  Try the carrot cake pancakes."
+        },
+        { "name":"Seaport Grille",
+            "address":"6 Rowe Square", "phone": "978-282-9799",
+            "meals": "lunch, dinner",
+            "description": "Serving seafood, steak and casual fare.  Enjoy harbor views on the deck."
+        },
+        { "name":"Latitude 43",
+            "address":"25 Rogers Street", "phone": "978-281-0223",
+            "meals": "lunch, dinner",
+            "description": "Features artsy decor and sushi specials.  Live music evenings at the adjoining Minglewood Tavern."
+        },
+        { "name":"George's Coffee Shop",
+            "address":"178 Washington Street", "phone": "978-281-1910",
+            "meals": "coffee, breakfast, lunch",
+            "description": "A highly rated local diner with generously sized plates."
+        },
 
-const handlers = {
-     "LaunchRequest": function() {
-        this.handler.state = states.START;
-        this.emitWithState("Start");
-     },
-    "QuizIntent": function() {
-        this.handler.state = states.QUIZ;
-        this.emitWithState("Quiz");
-    },
-    "AnswerIntent": function() {
-        this.handler.state = states.START;
-        this.emitWithState("AnswerIntent");
-    },
-    "AMAZON.HelpIntent": function() {
-        this.emit(":ask", HELP_MESSAGE, HELP_MESSAGE);
-    },
-    "Unhandled": function() {
-        this.handler.state = states.START;
-        this.emitWithState("Start");
-    }
+    ],
+    "attractions":[
+        {
+            "name": "Whale Watching",
+            "description": "Gloucester has tour boats that depart twice daily from Rogers street at the harbor.  Try either the 7 Seas Whale Watch, or Captain Bill and Sons Whale Watch. ",
+            "distance": "0"
+        },
+        {
+            "name": "Good Harbor Beach",
+            "description": "Facing the Atlantic Ocean, Good Harbor Beach has huge expanses of soft white sand that attracts hundreds of visitors every day during the summer.",
+            "distance": "2"
+        },
+        {
+            "name": "Rockport",
+            "description": "A quaint New England town, Rockport is famous for rocky beaches, seaside parks, lobster fishing boats, and several art studios.",
+            "distance": "4"
+        },
+        {
+            "name": "Fenway Park",
+            "description": "Home of the Boston Red Sox, Fenway park hosts baseball games From April until October, and is open for tours. ",
+            "distance": "38"
+        }
+    ]
+}
+
+// Weather courtesy of the Yahoo Weather API.
+// This free API recommends no more than 2000 calls per day
+
+var myAPI = {
+    host: 'query.yahooapis.com',
+    port: 443,
+    path: `/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22${encodeURIComponent(data.city)}%2C%20${data.state}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`,
+    method: 'GET'
 };
+// 2. Skill Code =======================================================================================================
 
-var startHandlers = Alexa.CreateStateHandler(states.START,{
-    "Start": function() {
-        this.emit(":ask", WELCOME_MESSAGE, HELP_MESSAGE);
-    },
-    "AnswerIntent": function() {
-        var item = getItem(this.event.request.intent.slots);
+var Alexa = require('alexa-sdk');
 
-        if (item && item[Object.getOwnPropertyNames(data[0])[0]] != undefined)
-        {
-          console.log("\nMEMO's TEST\n");
-            if (USE_CARDS_FLAG)
-            {
-                var imageObj = {smallImageUrl: getSmallImage(item), largeImageUrl: getLargeImage(item)};
-                this.emit(":askWithCard", getSpeechDescription(item), REPROMPT_SPEECH, getCardTitle(item), getTextDescription(item), imageObj);
-            }
-            else
-            {
-                this.emit(":ask", getSpeechDescription(item), REPROMPT_SPEECH);
-            }
-        }
-        else
-        {
-            this.emit(":ask", getBadAnswer(item), getBadAnswer(item));
+exports.handler = function(event, context, callback) {
+    var alexa = Alexa.handler(event, context);
 
-        }
-    },
-    "QuizIntent": function() {
-        this.handler.state = states.QUIZ;
-        this.emitWithState("Quiz");
-    },
-    "AMAZON.StopIntent": function() {
-        this.emit(":tell", EXIT_SKILL_MESSAGE);
-    },
-    "AMAZON.CancelIntent": function() {
-        this.emit(":tell", EXIT_SKILL_MESSAGE);
-    },
-    "AMAZON.HelpIntent": function() {
-        this.emit(":ask", HELP_MESSAGE, HELP_MESSAGE);
-    },
-    "Unhandled": function() {
-        this.emitWithState("Start");
-    }
-});
-
-
-var quizHandlers = Alexa.CreateStateHandler(states.QUIZ,{
-    "Quiz": function() {
-        this.attributes["response"] = "";
-        this.attributes["counter"] = 0;
-        this.attributes["quizscore"] = 0;
-        this.emitWithState("AskQuestion");
-    },
-    "AskQuestion": function() {
-        if (this.attributes["counter"] == 0)
-        {
-            this.attributes["response"] = START_QUIZ_MESSAGE + " ";
-        }
-
-        var random = getRandom(0, data.length-1);
-        var item = data[random];
-
-        var propertyArray = Object.getOwnPropertyNames(item);
-        var property = propertyArray[getRandom(1, propertyArray.length-1)];
-
-        this.attributes["quizitem"] = item;
-        this.attributes["quizproperty"] = property;
-        this.attributes["counter"]++;
-
-        var question = getQuestion(this.attributes["counter"], property, item);
-        var speech = this.attributes["response"] + question;
-
-        this.emit(":ask", speech, question);
-    },
-    "AnswerIntent": function() {
-        var response = "";
-        var item = this.attributes["quizitem"];
-        var property = this.attributes["quizproperty"]
-
-        var correct = compareSlots(this.event.request.intent.slots, item[property]);
-
-        if (correct)
-        {
-            response = getSpeechCon(true);
-            this.attributes["quizscore"]++;
-        }
-        else
-        {
-            response = getSpeechCon(false);
-        }
-
-        response += getAnswer(property, item);
-
-        if (this.attributes["counter"] < 10)
-        {
-            response += getCurrentScore(this.attributes["quizscore"], this.attributes["counter"]);
-            this.attributes["response"] = response;
-            this.emitWithState("AskQuestion");
-        }
-        else
-        {
-            response += getFinalScore(this.attributes["quizscore"], this.attributes["counter"]);
-            this.emit(":tell", response + " " + EXIT_SKILL_MESSAGE);
-        }
-    },
-    "AMAZON.StartOverIntent": function() {
-        this.emitWithState("Quiz");
-    },
-    "AMAZON.StopIntent": function() {
-        this.emit(":tell", EXIT_SKILL_MESSAGE);
-    },
-    "AMAZON.CancelIntent": function() {
-        this.emit(":tell", EXIT_SKILL_MESSAGE);
-    },
-    "AMAZON.HelpIntent": function() {
-        this.emit(":ask", HELP_MESSAGE, HELP_MESSAGE);
-    },
-    "Unhandled": function() {
-        this.emitWithState("AnswerIntent");
-    }
-});
-
-function compareSlots(slots, value)
-{
-    for (var slot in slots)
-    {
-        if (slots[slot].value != undefined)
-        {
-            if (slots[slot].value.toString().toLowerCase() == value.toString().toLowerCase())
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-function getRandom(min, max)
-{
-    return Math.floor(Math.random() * (max-min+1)+min);
-}
-
-function getRandomSymbolSpeech(symbol)
-{
-    return "<say-as interpret-as='spell-out'>" + symbol + "</say-as>";
-}
-
-function getItem(slots)
-{
-    var propertyArray = Object.getOwnPropertyNames(data[0]);
-    var value;
-
-    for (var slot in slots)
-    {
-        if (slots[slot].value !== undefined)
-        {
-            value = slots[slot].value;
-            for (var property in propertyArray)
-            {
-                var item = data.filter(x => x[propertyArray[property]].toString().toLowerCase() === slots[slot].value.toString().toLowerCase());
-                if (item.length > 0)
-                {
-                    return item[0];
-                }
-            }
-        }
-    }
-    return value;
-}
-
-function getSpeechCon(type)
-{
-    var speechCon = "";
-    if (type) return "<say-as interpret-as='interjection'>" + speechConsCorrect[getRandom(0, speechConsCorrect.length-1)] + "! </say-as><break strength='strong'/>";
-    else return "<say-as interpret-as='interjection'>" + speechConsWrong[getRandom(0, speechConsWrong.length-1)] + " </say-as><break strength='strong'/>";
-}
-
-function formatCasing(key)
-{
-    key = key.split(/(?=[A-Z])/).join(" ");
-    return key;
-}
-
-function getTextDescription(item)
-{
-    var text = "";
-
-    for (var key in item)
-    {
-        text += formatCasing(key) + ": " + item[key] + "\n";
-    }
-    return text;
-}
-
-exports.handler = (event, context) => {
-    const alexa = Alexa.handler(event, context);
-    alexa.appId = APP_ID;
-    alexa.registerHandlers(handlers, startHandlers, quizHandlers);
+    // alexa.appId = 'amzn1.echo-sdk-ams.app.1234';
+    ///alexa.dynamoDBTableName = 'YourTableName'; // creates new table for session.attributes
+    alexa.resources = languageStrings;
+    alexa.registerHandlers(handlers);
     alexa.execute();
 };
+
+var handlers = {
+    'LaunchRequest': function () {
+        var say = this.t('WELCOME') + ' ' + this.t('HELP');
+        this.emit(':ask', say, say);
+    },
+
+    'AboutIntent': function () {
+        this.emit(':tell', this.t('ABOUT'));
+    },
+
+    'CoffeeIntent': function () {
+        var restaurant = randomArrayElement(getRestaurantsByMeal('coffee'));
+        this.attributes['restaurant'] = restaurant.name;
+
+        var say = 'For a great coffee shop, I recommend, ' + restaurant.name + '. Would you like to hear more?';
+        this.emit(':ask', say);
+    },
+
+    'BreakfastIntent': function () {
+        var restaurant = randomArrayElement(getRestaurantsByMeal('breakfast'));
+        this.attributes['restaurant'] = restaurant.name;
+
+        var say = 'For breakfast, try this, ' + restaurant.name + '. Would you like to hear more?';
+        this.emit(':ask', say);
+    },
+
+    'LunchIntent': function () {
+        var restaurant = randomArrayElement(getRestaurantsByMeal('lunch'));
+        this.attributes['restaurant'] = restaurant.name;
+
+        var say = 'Lunch time! Here is a good spot. ' + restaurant.name + '. Would you like to hear more?';
+        this.emit(':ask', say);
+    },
+
+    'DinnerIntent': function () {
+        var restaurant = randomArrayElement(getRestaurantsByMeal('dinner'));
+        this.attributes['restaurant'] = restaurant.name;
+
+        var say = 'Enjoy dinner at, ' + restaurant.name + '. Would you like to hear more?';
+        this.emit(':ask', say);
+    },
+
+    'AMAZON.YesIntent': function () {
+        var restaurantName = this.attributes['restaurant'];
+        var restaurantDetails = getRestaurantByName(restaurantName);
+
+        var say = restaurantDetails.name
+            + ' is located at ' + restaurantDetails.address
+            + ', the phone number is ' + restaurantDetails.phone
+            + ', and the description is, ' + restaurantDetails.description
+            + '  I have sent these details to the Alexa App on your phone.  Enjoy your meal! <say-as interpret-as="interjection">bon appetit</say-as>' ;
+
+        var card = restaurantDetails.name + '\n' + restaurantDetails.address + '\n'
+            + data.city + ', ' + data.state + ' ' + data.postcode
+            + '\nphone: ' + restaurantDetails.phone + '\n';
+
+        this.emit(':tellWithCard', say, restaurantDetails.name, card);
+
+    },
+
+    'AttractionIntent': function () {
+        var distance = 200;
+        if (this.event.request.intent.slots.distance.value) {
+            distance = this.event.request.intent.slots.distance.value;
+        }
+
+        var attraction = randomArrayElement(getAttractionsByDistance(distance));
+
+        var say = 'Try '
+            + attraction.name + ', which is '
+            + (attraction.distance == "0" ? 'right downtown. ' : attraction.distance + ' miles away. Have fun! ')
+            + attraction.description;
+
+        this.emit(':tell', say);
+    },
+
+    'GoOutIntent': function () {
+
+        getWeather( ( localTime, currentTemp, currentCondition) => {
+            // time format 10:34 PM
+            // currentTemp 72
+            // currentCondition, e.g.  Sunny, Breezy, Thunderstorms, Showers, Rain, Partly Cloudy, Mostly Cloudy, Mostly Sunny
+
+            // sample API URL for Irvine, CA
+            // https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22irvine%2C%20ca%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys
+
+            this.emit(':tell', 'It is ' + localTime
+                + ' and the weather in ' + data.city
+                + ' is '
+                + currentTemp + ' and ' + currentCondition);
+
+            // TODO
+            // Decide, based on current time and weather conditions,
+            // whether to go out to a local beach or park;
+            // or recommend a movie theatre; or recommend staying home
+
+
+        });
+    },
+
+    'AMAZON.NoIntent': function () {
+        this.emit('AMAZON.StopIntent');
+    },
+    'AMAZON.HelpIntent': function () {
+        this.emit(':ask', this.t('HELP'));
+    },
+    'AMAZON.CancelIntent': function () {
+        this.emit(':tell', this.t('STOP'));
+    },
+    'AMAZON.StopIntent': function () {
+        this.emit(':tell', this.t('STOP'));
+    }
+
+};
+
+//    END of Intent Handlers {} ========================================================================================
+// 3. Helper Function  =================================================================================================
+
+function getRestaurantsByMeal(mealtype) {
+
+    var list = [];
+    for (var i = 0; i < data.restaurants.length; i++) {
+
+        if(data.restaurants[i].meals.search(mealtype) >  -1) {
+            list.push(data.restaurants[i]);
+        }
+    }
+    return list;
+}
+
+function getRestaurantByName(restaurantName) {
+
+    var restaurant = {};
+    for (var i = 0; i < data.restaurants.length; i++) {
+
+        if(data.restaurants[i].name == restaurantName) {
+            restaurant = data.restaurants[i];
+        }
+    }
+    return restaurant;
+}
+
+function getAttractionsByDistance(maxDistance) {
+
+    var list = [];
+
+    for (var i = 0; i < data.attractions.length; i++) {
+
+        if(parseInt(data.attractions[i].distance) <= maxDistance) {
+            list.push(data.attractions[i]);
+        }
+    }
+    return list;
+}
+
+function getWeather(callback) {
+    var https = require('https');
+
+
+    var req = https.request(myAPI, res => {
+        res.setEncoding('utf8');
+        var returnData = "";
+
+        res.on('data', chunk => {
+            returnData = returnData + chunk;
+        });
+        res.on('end', () => {
+            var channelObj = JSON.parse(returnData).query.results.channel;
+
+            var localTime = channelObj.lastBuildDate.toString();
+            localTime = localTime.substring(17, 25).trim();
+
+            var currentTemp = channelObj.item.condition.temp;
+
+            var currentCondition = channelObj.item.condition.text;
+
+            callback(localTime, currentTemp, currentCondition);
+
+        });
+
+    });
+    req.end();
+}
+function randomArrayElement(array) {
+    var i = 0;
+    i = Math.floor(Math.random() * array.length);
+    return(array[i]);
+}
