@@ -56,10 +56,10 @@ Continuing with Local Recommendations, we’ve customized for our city/town, let
 
 1. Now Click Save at the top, then click Test.  This time our test should pass.
 
-1. On the line below ``` var say = 'handling the team name intent'; ```, enter this code:
+1. On the line below ``` var say = 'handling the team name intent'; ```, paste this code:
 
 ```
-        var sport = '';
+        var sportName = '';
         if (this.event.request.intent.slots.sport.value) {
             sport = this.event.request.intent.slots.sport.value;
         }
