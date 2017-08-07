@@ -52,7 +52,7 @@ Continuing with Local Recommendations, we’ve customized for our city/town, let
 
 1. Add a line below the name that has this code: ``` var say = 'handling the team name intent'; ``` .
 
-1. Add a line below that with this code: ``` this.emit(':tell' say); ``` .
+1. Add a line below that with this code: ``` this.emit(':tell', say); ``` .
 
 1. Now Click Save at the top, then click Test.  This time our test should pass.
 
