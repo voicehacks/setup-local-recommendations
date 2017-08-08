@@ -63,7 +63,7 @@ Continuing with Local Recommendations, we’ve customized for our city/town, let
         if (this.event.request.intent.slots.sport.value) {
             sport = this.event.request.intent.slots.sport.value;
         }
-        switch(sportName) {
+        switch(sport) {
         case 'basketball':
           say = 'The Boston Celtics are the local basketball team.';
           break;
