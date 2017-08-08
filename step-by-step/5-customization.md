@@ -42,9 +42,9 @@ At this point, you should have a working copy of our Local Recommendations skill
 
     *  For example, if you are creating your skill in German, every single response that Alexa makes has to be in German.  You can't use English responses or your skill will fail certification.
 
-3.  **Once you have made the updates listed on this page, you can click "Next" to move on to adding new intents and custom slots to your skill.**
+3.  **Once you have made the updates listed on this page, you can move on to adding new intents and custom slots to your skill.**
 
-    <a href="../step-by-step/6-intents-slots.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/3-7-next-button._TTH_.png" /></a>
+[Intents and Custom Slots](/step-by-step/6-intents-slots.md)
 
 <br/><br/>
 <!-- <a href="../step-by-step/6-intents-slots.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_next_publication._TTH_.png" /></a> -->
