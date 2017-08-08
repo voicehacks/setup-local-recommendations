@@ -46,8 +46,6 @@ config.IOT_THING_NAME           = "thing1";
 
 <hr />
 
-    <a href="../../10-publication.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/3-7-next-button._TTH_.png" /></a>
-
 <br/><br/>
 <a href="../../step-by-step/6-custom-slots.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_next_publication._TTH_.png" /></a>
 

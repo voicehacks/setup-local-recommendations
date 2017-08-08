@@ -30,8 +30,7 @@ One-page design sheets can be printed and used to brainstorm ideas for a convers
 * [Alexa Dialogue Design](https://www.amazon.com/clouddrive/share/5WMoGXcKHSWWSoRiC3VNFmBnEveQBdPnLZq711Iu3d?ref_=cd_ph_share_link_copy)
 * [Alexa Dialogue Design - Detailed](https://www.amazon.com/clouddrive/share/PLKDyDip6Jv1HK450NTTGzJZJB4QjDyYxTMlQgmWDCQ?ref_=cd_ph_share_link_copy)
 
-
-    <a href="../step-by-step/9-alexa-iot.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/3-7-next-button._TTH_.png" /></a>
+Now that you feel comfortable designing for Alexa, you may want to learn about [Alexa and IoT](/step-by-step/7-smart-recommendations.md)
 
 <br/><br/>
 <!-- <a href="../../step-by-step/9-alexa-iot.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_next_publication._TTH_.png" /></a> -->

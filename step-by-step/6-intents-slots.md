@@ -92,7 +92,7 @@ Continuing with Local Recommendations, we’ve customized for our city/town, let
 What about custom slot types? The Alexa [Quiz Game](https://github.com/alexa/skill-sample-nodejs-quiz-game/blob/master/step-by-step/1-voice-user-interface.md) Skill uses a custom slot, named US_STATE_ABBR.  Try creating a custom slot for your own skill.
 
 
-    <a href="../step-by-step/7-smart-recommendations.md">Make Smart Recommendations</a>
+When you are ready, proceed to [Smart Recommendations](/step-by-step/7-smart-recommendations.md).
 
 <br/><br/>
 <!-- <a href="../step-by-step/7-smart-recommendations.md"><img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/buttons/button_next_publication._TTH_.png" /></a> -->
