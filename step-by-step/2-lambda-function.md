@@ -39,7 +39,7 @@ In the [first step of this guide](../step-by-step/1-voice-user-interface.md), we
 
     <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/general/2-7-configure-your-function._TTH_.png" />
 
-8.  **Copy and paste the [provided code](../master/src/index.js) into the Lambda function code box.**  We have provided the code for this skill on [GitHub](../src/index.js).  Delete the contents of the code box, and paste the contents of the new code.
+8.  **Copy and paste the [provided code](https://github.com/voicehacks/setup-local-recommendations/blob/master/src/index.js) into the Lambda function code box.**  We have provided the code for this skill on [GitHub](../src/index.js).  Delete the contents of the code box, and paste the contents of the new code.
 
 9.  **Set up your Lambda function role.**  If you haven't done this before, we have a [detailed walkthrough for setting up your first role for Lambda](../lambda-role.md).  If you have done this before, set your **Existing role** value to "lambda_basic_execution."
 
