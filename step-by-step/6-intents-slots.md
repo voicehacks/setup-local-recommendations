@@ -61,7 +61,7 @@ Continuing with Local Recommendations, we’ve customized for our city/town, let
 ```
         var sportName = '';
         if (this.event.request.intent.slots.sport.value) {
-            sport = this.event.request.intent.slots.sport.value;
+            sportName = this.event.request.intent.slots.sport.value;
         }
         switch(sportName) {
         case 'basketball':
