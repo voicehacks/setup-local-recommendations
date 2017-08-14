@@ -30,10 +30,11 @@ For example, add logic to decide, based on current time and weather conditions, 
 1. Now, paste this code into your GoOutIntent:
 
 ```
-            var AMPM = localTime.substring(6,8);
+            var AMPM = localTime.substr(-2);
             console.log(AMPM);
-            var hour = parseInt(localTime.substring(6,8));
-            if(AMPM == "PM") { hour = hour + 12; }
+            var hour = parseInt(localTime.split(':').shift());
+            if(AMPM == "PM" && hour < 12) { hour = hour + 12; }
+            console.log(hour);
 
             var suggestion = 'Read a book.';
 
